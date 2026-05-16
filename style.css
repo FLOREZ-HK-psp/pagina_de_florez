@@ -165,14 +165,19 @@ body {
         overflow-y: auto; /* Permite scroll vertical en celulares */
     }
 
-    .contenedor-tarjetas {
-        flex-direction: column;    /* Coloca las tarjetas una abajo de otra */
-        align-items: center;       /* Las centra horizontalmente */
-        justify-content: flex-start;
-        padding-top: 140px;        /* Espacio para que no choquen con la barra gris superior (#cuadro1) */
-        gap: 30px;
-        min-height: auto;
-    }
+.contenedor-tarjetas {
+    display: flex;
+    justify-content: center; 
+    align-items: flex-end; /* Alinea los cuadros al fondo en PC */
+    gap: 40px;               
+    width: 100%;
+    min-height: 100vh;       
+    position: relative;
+    z-index: 10;             
+    padding-bottom: 80px;    /* AUMENTADO: Empuja los cuadros hacia arriba desde el fondo de forma controlada */
+    box-sizing: border-box;
+}
+
 
     .tarjeta {
         width: 90%;                /* Se adaptan al ancho de la pantalla del celular */

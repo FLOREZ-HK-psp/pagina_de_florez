@@ -30,11 +30,14 @@ cuadros.forEach(cuadro => {
 
         if (!datos) return; 
 
-        // Ocultar elementos actuales
+        // ✅ CORREGIDO: Ocultamos usando clases CSS para no romper Flexbox en celulares
         cuadros.forEach(c => { 
             c.style.transition = 'opacity 0.5s ease'; 
             c.style.opacity = '0'; 
-            setTimeout(() => c.style.display = 'none', 500); 
+            c.style.pointerEvents = 'none'; // Evita que se pueda hacer clic mientras desaparece
+            setTimeout(() => {
+                c.classList.add('oculto'); // Usamos la clase .oculto que ya tienes en tu CSS
+            }, 500); 
         }); 
         
         if (punto) punto.style.display = 'none'; 
