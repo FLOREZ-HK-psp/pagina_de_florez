@@ -87,14 +87,22 @@ body {
     }
 }
 
-/* HOVER (Solo para PC) */
-@media (min-width: 769px) {
+/* ========================= HOVER EFECTO (RECUPERADO PARA PC) ========================= */
+/* Aplicamos el hover usando la clase común, manteniendo la alineación de flexbox */
+.tarjeta:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    z-index: 15;
+}
+
+/* Evitamos que el hover afecte a los celulares para que no se vea raro al tocar la pantalla */
+@media (max-width: 768px) {
     .tarjeta:hover {
-        transform: translateY(-15px) scale(1.03);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-        z-index: 15;
+        transform: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 }
+
 
 /* ========================= IMÁGENES ========================= */
 .tarjeta img {
