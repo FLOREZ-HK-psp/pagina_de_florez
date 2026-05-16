@@ -289,26 +289,52 @@ body {
 
 
 
-/* Esto se aplicará solo en pantallas menores a 768px (celulares y tablets) */
+/* 1. Estilos para el nuevo contenedor (Alinea los cuadros en PC) */
+.contenedor-tarjetas {
+    display: flex;
+    justify-content: center; /* Centra los cuadros horizontalmente */
+    align-items: center;     /* Centra los cuadros verticalmente */
+    gap: 30px;               /* Separa los cuadros entre sí */
+    width: 100%;
+    min-height: 100vh;       /* Hace que ocupe todo el alto de la pantalla */
+    position: relative;
+    z-index: 10;             /* Asegura que quede por encima del fondo/blur */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 2. Limpieza de tus cuadros principales */
+#cuadro2, #cuadro3, #cuadro4 {
+    /* IMPORTANTE: Elimina cualquier 'position: absolute', 'top', o 'left' que tuvieras antes */
+    position: relative; 
+    top: auto;
+    left: auto;
+    width: 300px;            /* Un ancho fijo ideal para las tarjetas */
+    background: white;       /* Ajusta al fondo que tenías */
+    border-radius: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 3. Asegurar que las imágenes no se desborden de los cuadros */
+.contenedor-tarjetas img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ======================================================= */
+/* 4. MEDIA QUERY PARA CELULARES (El cambio automático)    */
+/* ======================================================= */
 @media (max-width: 768px) {
-    body {
-        /* Permite que la pantalla haga scroll hacia abajo si el contenido es largo */
-        overflow-y: auto; 
-        padding: 20px;
+    .contenedor-tarjetas {
+        flex-direction: column; /* Cambia de horizontal en PC a vertical en Celular */
+        justify-content: flex-start;
+        padding-top: 50px;      /* Espacio superior en el móvil */
     }
 
-    /* Cambia la distribución de los cuadros a una sola columna */
     #cuadro2, #cuadro3, #cuadro4 {
-        position: static !important; /* Rompe posiciones absolutas rígidas */
-        width: 100% !important;     /* Ocupa todo el ancho disponible del celular */
-        max-width: 320px;           /* Evita que se estiren demasiado */
-        margin: 20px auto;          /* Los centra y los separa verticalmente */
-        display: block;
-    }
-
-    /* Ajusta las imágenes para que no se salgan de sus cuadros */
-    #cuadro2 img, #cuadro3 img, #cuadro4 img {
-        width: 100%;
-        height: auto;
+        width: 100%;            /* Ocupa el ancho del celular */
+        max-width: 340px;       /* Evita que se deforme en pantallas medianas */
     }
 }
