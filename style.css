@@ -68,11 +68,16 @@ body {
     border-radius: 16px;
     background: white;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     opacity: 0;
-    transform: translateY(100vh); /* Empiezan abajo ocultas fuera de pantalla */
+    
+    /* 1. Definimos la animación de entrada inicial */
+    transform: translateY(100vh); 
     animation: subirTarjetas 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+
+    /* 2. CLAVE: Esta transición controla lo suave que se moverá al pasar y quitar el mouse */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow 0.4s ease;
 }
 
 /* Tiempos escalonados para la animación de entrada */
@@ -80,29 +85,36 @@ body {
 #cuadro3 { height: 500px; animation-delay: 0.4s; }
 #cuadro4 { height: 550px; animation-delay: 0.6s; }
 
+/* REESCRITURA DE LA ANIMACIÓN: Quitamos la propiedad transform directa del fotograma final 
+   para permitir que el estado natural del CSS y el hover tomen el control del escalado */
 @keyframes subirTarjetas {
-    to {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh);
+    }
+    100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0); /* Estado base en su lugar definitivo */
     }
 }
 
-/* ========================= HOVER EFECTO (RECUPERADO PARA PC) ========================= */
-/* Aplicamos el hover usando la clase común, manteniendo la alineación de flexbox */
-.tarjeta:hover {
-    transform: scale(1.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-    z-index: 15;
+/* ========================= HOVER EFECTO (RECUPERADO Y SUAVE) ========================= */
+/* El selector de hover ahora se ejecutará limpiamente sobre el estado de la tarjeta */
+@media (min-width: 769px) {
+    .tarjeta:hover {
+        transform: scale(1.05) !important; /* El !important rompe el bloqueo remanente del fill-mode */
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        z-index: 15;
+    }
 }
 
-/* Evitamos que el hover afecte a los celulares para que no se vea raro al tocar la pantalla */
+/* Evitamos que el hover afecte a los celulares para que no cause problemas táctiles */
 @media (max-width: 768px) {
     .tarjeta:hover {
-        transform: none;
+        transform: none !important;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 }
-
 
 /* ========================= IMÁGENES ========================= */
 .tarjeta img {
