@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+    overflow: hidden;
+    background: black;
+
+}
+
+/* El punto blanco */
+
+#punto{
+    widht: 20px;
+    height: 20px;
+
+
+    background: white;
+
+
+    border-radius: 50%;
+
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+
+    transform: translate(-50%, -50%) scale(1);
+
+    animation: expandir 2s ease-out forawards;
+}
+
+
+/*Animacion*/
+@keyframes expandir{
+
+
+    0%{
+            transform:trabslate(-50%, -50%) scale(1);
+    }
+
+    100%{
+            transform: translate(-50%, -50%) scale(200);
+    }
+}
