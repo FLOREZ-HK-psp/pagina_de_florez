@@ -1,0 +1,288 @@
+/* ========================= CONFIGURACIÓN GENERAL ========================= */
+body {
+    margin: 0;
+    overflow: hidden;
+    background: white;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* ========================= PUNTO ANIMADO ========================= */
+#punto {
+    width: 20px;
+    height: 20px;
+    background: black; /* CAMBIADO para que se vea */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: expandir 3s ease-out forwards;
+}
+
+@keyframes expandir {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(200);
+    }
+}
+
+/* ========================= CUADRO SUPERIOR ========================= */
+#cuadro1 {
+    width: 100%;
+    height: 100px;
+    background: rgb(194, 194, 194);
+
+    position: absolute;
+    top: -100px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    animation: subir1 2s forwards;
+}
+
+@keyframes subir1 {
+    from {
+        top: -100px;
+    }
+
+    to {
+        top: 0;
+    }
+}
+
+/* ========================= CUADROS PRINCIPALES ========================= */
+#cuadro2,
+#cuadro3,
+#cuadro4 {
+
+    position: absolute;
+
+    bottom: -650px;
+
+    transform: translateX(-50%);
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: white;
+
+    animation: subir 3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+
+    cursor: pointer;
+}
+
+/* POSICIONES */
+#cuadro2 {
+    width: 300px;
+    height: 450px;
+    left: 20%;
+}
+
+#cuadro3 {
+    width: 300px;
+    height: 500px;
+    left: 50%;
+}
+
+#cuadro4 {
+    width: 300px;
+    height: 550px;
+    left: 80%;
+}
+
+/* HOVER */
+#cuadro2:hover,
+#cuadro3:hover,
+#cuadro4:hover {
+
+    transform: translateX(-50%) scale(1.05);
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+
+    z-index: 10;
+}
+
+/* ANIMACIÓN SUBIDA */
+@keyframes subir {
+
+    from {
+        bottom: -650px;
+    }
+
+    to {
+        bottom: 40px;
+    }
+}
+
+/* ========================= IMÁGENES ========================= */
+#imagenperson1,
+#imagenperson2,
+#imagenperson3 {
+
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+/* ========================= TEXTOS ========================= */
+.titulo,
+.texto {
+
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+
+    z-index: 5;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    color: #333333;
+
+    opacity: 0;
+
+    animation: aparecerTexto 1s ease-out forwards;
+}
+
+.titulo {
+
+    top: 245px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+.texto {
+
+    top: 285px;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    color: #666666;
+}
+
+@keyframes aparecerTexto {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================= BLUR ABAJO ========================= */
+#blur {
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 200px;
+
+    background: linear-gradient(
+        to top,
+        rgba(255,255,255,1),
+        rgba(255,255,255,0)
+    );
+
+    backdrop-filter: blur(8px);
+
+    pointer-events: none;
+}
+
+/* ========================= OCULTAR ========================= */
+.oculto {
+    display: none !important;
+}
+
+/* ========================= PANTALLA FINAL ========================= */
+#pantalla-final {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) !important;
+
+    text-align: center;
+
+    width: 80%;
+    max-width: 800px;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    color: #333333;
+
+    z-index: 20;
+
+    opacity: 0;
+}
+
+#titulo-final {
+
+    font-size: 42px;
+
+    margin-bottom: 20px;
+
+    color: #111111;
+}
+
+#texto-final {
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    color: #555555;
+}
+
+/* ========================= TRANSICIONES ========================= */
+@keyframes desaparecerTodo {
+
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+@keyframes aparecerPantallaFinal {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1 !important;
+    }
+}
