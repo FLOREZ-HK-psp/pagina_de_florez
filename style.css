@@ -1,7 +1,7 @@
 /* ========================= CONFIGURACIÓN GENERAL ========================= */
 body {
     margin: 0;
-    background: white;
+    background: black;
     width: 100vw;
     min-height: 100vh;
     position: relative;
@@ -13,7 +13,7 @@ body {
 #punto {
     width: 20px;
     height: 20px;
-    background: black;
+    background: white;
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -50,13 +50,13 @@ body {
 .contenedor-tarjetas {
     display: flex;
     justify-content: center; 
-    align-items: flex-end; /* Alinea los cuadros abajo en PC */
+    align-items: flex-end;    /* Alinea los cuadros abajo en PC */
     gap: 40px;               
     width: 100%;
     min-height: 100vh;       
     position: relative;
     z-index: 10;             
-    padding-bottom: 60px;    /* Margen abajo para que respiren las tarjetas */
+    padding-bottom: 80px;     /* Empuja los cuadros hacia arriba de forma controlada */
     box-sizing: border-box;
 }
 
@@ -71,48 +71,38 @@ body {
     cursor: pointer;
     opacity: 0;
     
-    /* 1. Definimos la animación de entrada inicial */
-    transform: translateY(100vh); 
+    /* Animación inicial usando 'top' para no bloquear el transform */
+    top: 100vh; 
     animation: subirTarjetas 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 
-    /* 2. CLAVE: Esta transición controla lo suave que se moverá al pasar y quitar el mouse */
+    /* Transición súper suave y limpia exclusiva para el HOVER */
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
                 box-shadow 0.4s ease;
 }
 
-/* Tiempos escalonados para la animación de entrada */
+/* Tiempos escalonados y alturas para la animación de entrada */
 #cuadro2 { height: 450px; animation-delay: 0.2s; }
 #cuadro3 { height: 500px; animation-delay: 0.4s; }
 #cuadro4 { height: 550px; animation-delay: 0.6s; }
 
-/* REESCRITURA DE LA ANIMACIÓN: Quitamos la propiedad transform directa del fotograma final 
-   para permitir que el estado natural del CSS y el hover tomen el control del escalado */
+/* Animación limpia modificando la posición física, no la deformación */
 @keyframes subirTarjetas {
     0% {
         opacity: 0;
-        transform: translateY(100vh);
+        top: 100vh;
     }
     100% {
         opacity: 1;
-        transform: translateY(0); /* Estado base en su lugar definitivo */
+        top: 0; 
     }
 }
 
-/* ========================= HOVER EFECTO (RECUPERADO Y SUAVE) ========================= */
-/* El selector de hover ahora se ejecutará limpiamente sobre el estado de la tarjeta */
+/* ========================= HOVER EFECTO SUAVE (PC) ========================= */
 @media (min-width: 769px) {
     .tarjeta:hover {
-        transform: scale(1.05) !important; /* El !important rompe el bloqueo remanente del fill-mode */
+        transform: scale(1.05); /* Funciona perfecto y fluido al no haber conflicto */
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
         z-index: 15;
-    }
-}
-
-/* Evitamos que el hover afecte a los celulares para que no cause problemas táctiles */
-@media (max-width: 768px) {
-    .tarjeta:hover {
-        transform: none !important;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 }
 
@@ -151,7 +141,7 @@ body {
     left: 0;
     width: 100%;
     height: 120px;
-    background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+    background: linear-gradient(to top, rgb(198, 198, 198), rgba(255,255,255,0));
     backdrop-filter: blur(8px);
     pointer-events: none;
     z-index: 12;
@@ -178,34 +168,35 @@ body {
 
 
 /* ======================================================= */
-/* REGLAS RESPONSIVE AUTOMÁTICAS PARA CELULAR VERTICAL    */
+/* REGLAS RESPONSIVE CORREGIDAS PARA CELULAR VERTICAL      */
 /* ======================================================= */
 @media (max-width: 768px) {
     body {
-        overflow-y: auto; /* Permite scroll vertical en celulares */
+        overflow-y: auto; /* Permite scroll vertical */
     }
 
-.contenedor-tarjetas {
-    display: flex;
-    justify-content: center; 
-    align-items: flex-end; /* Alinea los cuadros al fondo en PC */
-    gap: 40px;               
-    width: 100%;
-    min-height: 100vh;       
-    position: relative;
-    z-index: 10;             
-    padding-bottom: 80px;    /* AUMENTADO: Empuja los cuadros hacia arriba desde el fondo de forma controlada */
-    box-sizing: border-box;
-}
-
+    .contenedor-tarjetas {
+        flex-direction: column;    /* Coloca las tarjetas una abajo de otra */
+        align-items: center;       /* Las centra horizontalmente */
+        justify-content: flex-start;
+        padding-top: 140px;        /* Espacio para que no choquen con la barra superior */
+        gap: 30px;
+        min-height: auto;
+    }
 
     .tarjeta {
-        width: 90%;                /* Se adaptan al ancho de la pantalla del celular */
+        width: 90%;                
         max-width: 320px;
-        height: 420px !important;  /* Forzamos una altura cómoda e igual en celulares */
+        height: 420px !important;  
+        top: 0;                    /* Resetea la posición inicial para el comportamiento en celular */
+    }
+
+    .tarjeta:hover {
+        transform: none;           /* Desactiva efectos de agrandar en celular */
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 
     #blur {
-        display: none;             /* Ocultamos el blur inferior fijo para que no moleste al hacer scroll */
+        display: none;             /* Oculta el blur inferior */
     }
 }
