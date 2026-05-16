@@ -286,3 +286,29 @@ body {
         opacity: 1 !important;
     }
 }
+
+
+
+/* Esto se aplicará solo en pantallas menores a 768px (celulares y tablets) */
+@media (max-width: 768px) {
+    body {
+        /* Permite que la pantalla haga scroll hacia abajo si el contenido es largo */
+        overflow-y: auto; 
+        padding: 20px;
+    }
+
+    /* Cambia la distribución de los cuadros a una sola columna */
+    #cuadro2, #cuadro3, #cuadro4 {
+        position: static !important; /* Rompe posiciones absolutas rígidas */
+        width: 100% !important;     /* Ocupa todo el ancho disponible del celular */
+        max-width: 320px;           /* Evita que se estiren demasiado */
+        margin: 20px auto;          /* Los centra y los separa verticalmente */
+        display: block;
+    }
+
+    /* Ajusta las imágenes para que no se salgan de sus cuadros */
+    #cuadro2 img, #cuadro3 img, #cuadro4 img {
+        width: 100%;
+        height: auto;
+    }
+}
