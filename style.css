@@ -1,7 +1,7 @@
 /* ========================= CONFIGURACIÓN GENERAL ========================= */
 body {
     margin: 0;
-    background: black;
+    background: rgb(255, 255, 255);
     width: 100vw;
     min-height: 100vh;
     position: relative;
@@ -120,7 +120,7 @@ body {
     left: 20px;
     right: 20px;
     z-index: 5;
-    color: #333333;
+    color: #000000;
     opacity: 0;
     animation: aparecerTexto 1s ease-out forwards;
     animation-delay: 2s; /* Aparecen después de que suben los cuadros */
@@ -159,7 +159,7 @@ body {
     text-align: center;
     width: 80%;
     max-width: 800px;
-    color: #333333;
+    color: #3f3f3f;
     z-index: 20;
     opacity: 0;
 }
